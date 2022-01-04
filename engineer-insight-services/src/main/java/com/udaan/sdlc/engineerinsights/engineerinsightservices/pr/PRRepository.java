@@ -13,7 +13,7 @@ public interface PRRepository extends JpaRepository<PR, Integer> {
 
 
    @Query("Select NEW  com.udaan.sdlc.engineerinsights.engineerinsightservices.pr.PR(\n" +
-           "            p.id, p.comments)  FROM PR p where misses= :missedval AND engineer_id= :enggid")
-    List<PR> findMissesByEngineer_ID(Integer missedval, Integer enggid);
+           "            p.id, p.repo_name)  FROM PR p where misses= :missedval AND git_id= :git_id")
+    List<PR> findMissesByEngineer_ID(Integer missedval, String git_id);
 
 }

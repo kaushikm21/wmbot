@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class CSVHelper {
     public static String TYPE = "text/csv";
     static String[] HEADERs = { "Id", "Bravo", "Joined", "Name", "Git_Id" };
-    static String[] PR_HEADERs = {"Id", "Review_Duration_Sec", "Review_Date", "Comments", "Misses", "Engineer_Id"};
+    static String[] PR_HEADERs = {"Git_Id", "Review_Duration_Min", "Review_Date", "Pr_Link", "Repo_Name", "Num_Comments", "Lines_Changed", "Requested_Date"};
 
     public static boolean hasCSVFormat(MultipartFile file) {
 
@@ -31,7 +31,6 @@ public class CSVHelper {
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
             List<Engineer> engineers = new ArrayList<>();
-
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
             for (CSVRecord csvRecord : csvRecords) {
                 Engineer engineer = new Engineer( Integer.parseInt(csvRecord.get("Id")),Integer.parseInt(csvRecord.get("Bravo")),
@@ -51,10 +50,10 @@ public class CSVHelper {
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
             List<PR> prs = new ArrayList<>();
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
-            System.out.println("parsing csvParser");
             for (CSVRecord csvRecord : csvRecords) {
-                PR pr = new PR( Integer.parseInt(csvRecord.get("Id")),Integer.parseInt(csvRecord.get("Review_Duration_Sec")),
-                        csvRecord.get("Review_Date"), csvRecord.get("Comments"),Integer.parseInt(csvRecord.get("Misses")),Integer.parseInt(csvRecord.get("Engineer_Id")));
+                PR pr = new PR( csvRecord.get("Git_Id"),Integer.parseInt(csvRecord.get("Review_Duration_Min")),
+                        csvRecord.get("Review_Date"), csvRecord.get("Pr_Link"),csvRecord.get("Repo_Name"),Integer.parseInt(csvRecord.get("Num_Comments")),
+                        Integer.parseInt(csvRecord.get("Lines_Changed")), csvRecord.get("Requested_Date"));
                 prs.add(pr);
             }
             return prs;

@@ -42,10 +42,10 @@ public class PRController {
        message = "Please upload a csv file!";
        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
    }
-  @GetMapping(value = "/prs/misses/{missedval}/{enggid}")
-    public List<PR> retrieveMissesByEngineer(@PathVariable int missedval, @PathVariable int enggid){
+  @GetMapping(value = "/prs/misses/{missedval}/{git_id}")
+    public List<PR> retrieveMissesByEngineer(@PathVariable int missedval, @PathVariable String git_id){
        System.out.println("coming here");
-        return prRepository.findMissesByEngineer_ID(missedval,enggid);
+        return prRepository.findMissesByEngineer_ID(missedval,git_id);
     }
 
 

@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.List;
 @EnableAutoConfiguration
@@ -12,22 +13,25 @@ import java.util.List;
 
 public class Engineer {
     @Id
-    private Integer id;
+    private String git_id;
     private int bravo;
     private String joined;
     private String name;
-    private String git_id;
+    private Integer id;
     private Double average_review_time;
     private int total_pr_reviews;
 
     @OneToMany(mappedBy = "engineer")
+
     private List <PR> prs;
 
     public Engineer(){}
     public Engineer(Integer id){
         this.id=id;
     }
-
+    public Engineer(String git_id){
+        this.git_id=git_id;
+    }
     public Engineer(Integer id, int bravo, String joined, String name, String git_id) {
         this.id = id;
         this.bravo = bravo;
