@@ -44,7 +44,7 @@ public class ChatBotBase {
                         response = response.replace("&lt;", "<");
                     while (response.contains("&gt;"))
                         response = response.replace("&gt;", ">");
-                    System.out.println("WonderBot : " + response);
+                    System.out.println("WondermartBot : " + response);
                 }
             }
         } catch (Exception e) {
